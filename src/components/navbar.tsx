@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { Compass, Menu, User } from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { Compass, Menu, User } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
   SheetClose,
@@ -12,27 +12,27 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
-import { cn } from "@/lib/utils"
+} from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/my-business", label: "My Business" },
+  { href: "/destinations", label: "Destination" },
+  { href: "/add-destination", label: "Add Destination" },
   { href: "/admin", label: "Admin" },
-]
+];
 
 function linkClassName(isActive: boolean) {
   return cn(
     "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
     isActive
       ? "bg-muted text-foreground"
-      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-  )
+      : "text-muted-foreground hover:bg-muted hover:text-foreground",
+  );
 }
 
 export default function Navbar() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md">
@@ -40,7 +40,7 @@ export default function Navbar() {
         {/* Left: main navigation (desktop) + menu button (mobile) */}
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href
+            const isActive = pathname === link.href;
             return (
               <Link
                 key={link.href}
@@ -50,7 +50,7 @@ export default function Navbar() {
               >
                 {link.label}
               </Link>
-            )
+            );
           })}
         </nav>
 
@@ -58,12 +58,19 @@ export default function Navbar() {
           <Sheet>
             <SheetTrigger
               render={
-                <Button variant="ghost" size="icon" aria-label="Open navigation menu" />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Open navigation menu"
+                />
               }
             >
               <Menu />
             </SheetTrigger>
-            <SheetContent side="left" className="w-72 max-w-none gap-6 sm:max-w-none">
+            <SheetContent
+              side="left"
+              className="w-72 max-w-none gap-6 sm:max-w-none"
+            >
               <SheetHeader className="border-b pb-4">
                 <SheetTitle className="flex items-center gap-2">
                   <span className="flex size-7 items-center justify-center rounded-full bg-primary text-primary-foreground">
@@ -75,7 +82,7 @@ export default function Navbar() {
 
               <nav className="flex flex-col gap-1 px-4" aria-label="Mobile">
                 {navLinks.map((link) => {
-                  const isActive = pathname === link.href
+                  const isActive = pathname === link.href;
                   return (
                     <SheetClose
                       key={link.href}
@@ -84,13 +91,16 @@ export default function Navbar() {
                         <Link
                           href={link.href}
                           aria-current={isActive ? "page" : undefined}
-                          className={cn(linkClassName(isActive), "w-full justify-start")}
+                          className={cn(
+                            linkClassName(isActive),
+                            "w-full justify-start",
+                          )}
                         />
                       }
                     >
                       {link.label}
                     </SheetClose>
-                  )
+                  );
                 })}
               </nav>
 
@@ -102,7 +112,7 @@ export default function Navbar() {
                       href="/profile"
                       className={cn(
                         buttonVariants({ variant: "outline" }),
-                        "w-full justify-start gap-2"
+                        "w-full justify-start gap-2",
                       )}
                     />
                   }
@@ -117,7 +127,7 @@ export default function Navbar() {
                       href="/login"
                       className={cn(
                         buttonVariants({ variant: "outline" }),
-                        "w-full justify-start"
+                        "w-full justify-start",
                       )}
                     />
                   }
@@ -127,7 +137,10 @@ export default function Navbar() {
                 <SheetClose
                   nativeButton={false}
                   render={
-                    <Link href="/signup" className={cn(buttonVariants(), "w-full")} />
+                    <Link
+                      href="/signup"
+                      className={cn(buttonVariants(), "w-full")}
+                    />
                   }
                 >
                   Sign up
@@ -145,7 +158,9 @@ export default function Navbar() {
           <span className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
             <Compass className="size-4" />
           </span>
-          <span className="text-lg font-semibold tracking-tight">Wanderlast</span>
+          <span className="text-lg font-semibold tracking-tight">
+            Wanderlast
+          </span>
         </Link>
 
         {/* Right: profile + auth actions */}
@@ -180,5 +195,5 @@ export default function Navbar() {
         </div>
       </div>
     </header>
-  )
+  );
 }
